@@ -1,0 +1,11 @@
+.sidebar {
+  background: #555;
+
+  * {
+    color: white
+  }
+
+  * + * {
+    margin-top: 8px;
+  }
+}

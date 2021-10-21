@@ -1,0 +1,27 @@
+.post-listing {
+  h1 {
+    text-align: center;
+  }
+
+  ul {
+    max-width: 1200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    list-style: none;
+
+    > li + li {
+      margin-top: 16px;
+    }
+
+    > li {
+      border-radius: 4px;
+
+      padding: 16px;
+
+      background-color: white;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+  }
+}

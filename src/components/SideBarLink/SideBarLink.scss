@@ -1,0 +1,12 @@
+.sidebar-link {
+  text-align: center;
+
+  a {
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}

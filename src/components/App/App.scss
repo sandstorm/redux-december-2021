@@ -1,0 +1,16 @@
+.App {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+
+  height: 100vh;
+  overflow: hidden;
+
+  > .content {
+    display: grid;
+    justify-content: space-around;
+
+    background-color: #eee;
+
+    overflow: auto;
+  }
+}

@@ -11,3 +11,9 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+// reset list styles
+ul {
+    list-style: none;
+    padding-inline-start: 0;
+}
