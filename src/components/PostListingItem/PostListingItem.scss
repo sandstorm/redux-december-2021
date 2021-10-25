@@ -1,9 +1,36 @@
 .post-listing-item {
+  position: relative;
+
   .subtitle {
     color: #999;
   }
 
   article {
     font-family: serif;
+  }
+
+  .action-button-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    margin-top: 0;
+
+    > button {
+      height: 32px;
+      width: 32px;
+
+      margin-top: 0;
+      margin-left: 4px;
+
+      border: 1px solid lightgray;
+      background-color: white;
+
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+      }
+    }
   }
 }

@@ -1,16 +1,30 @@
 .App {
+  margin-top: 0;
+
   display: grid;
   grid-template-columns: 120px 1fr;
 
   height: 100vh;
   overflow: hidden;
 
+  // flow
+  * + * {
+    margin-top: 16px;
+  }
+
   > .content {
     display: grid;
-    justify-content: space-around;
+    justify-content: stretch;
+
+    padding: 0 16px;
 
     background-color: #eee;
 
     overflow: auto;
+  }
+
+  // Why: needs to have higher specificity to overwrite '#root * + *' default flow
+  > #content {
+    margin-top: 0;
   }
 }

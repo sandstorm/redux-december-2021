@@ -1,11 +1,11 @@
 .sidebar {
+  margin-top: 0;
+
+  padding-top: 16px;
+
   background: #555;
 
   * {
     color: white
-  }
-
-  * + * {
-    margin-top: 8px;
   }
 }

@@ -1,27 +1,20 @@
 import { useEffect, useState } from 'react'
 import PostListingItem from '../PostListingItem/PostListingItem'
-import { Post } from '../../model/Post'
+import { fetchPosts, Post } from '../../model/Post'
+import { useLocation } from 'react-router-dom'
 import './PostListing.scss'
-
-const fetchPosts = async (setPosts: (posts: Array<Post>) => void) => {
-  // should json validate here
-  try {
-    const posts = (await (await fetch('http://localhost:3007/posts')).json()) as Array<Post>
-
-    setPosts(posts)
-  } catch (e) {}
-}
 
 const PostListing = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [posts, setPosts] = useState<Array<Post> | undefined>(undefined)
+  const location = useLocation()
 
   useEffect(() => {
     setIsLoading(true)
     fetchPosts(setPosts).finally(() => {
       setIsLoading(false)
     })
-  }, [])
+  }, [location.key])
 
   if (isLoading) {
     return <p>Loading Post...</p>
@@ -35,9 +28,9 @@ const PostListing = () => {
         </header>
         <main>
           <ul>
-            {posts.map((post) => (
+            {posts.map((post, index) => (
               <li key={post.id}>
-                <PostListingItem post={post} />
+                <PostListingItem post={post} index={index} />
               </li>
             ))}
           </ul>

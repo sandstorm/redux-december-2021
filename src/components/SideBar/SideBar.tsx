@@ -6,7 +6,7 @@ const SideBar = () => {
     <aside className="sidebar">
       <nav>
         <ul>
-          <SideBarLink to="/">Home</SideBarLink>
+          <SideBarLink to="/posts">Home</SideBarLink>
           <SideBarLink to="/create">Create</SideBarLink>
         </ul>
       </nav>

@@ -13,3 +13,64 @@ export const createBlankPost = (): Post => ({
   title: '',
   content: '',
 })
+
+export const fetchPost = async (id: Post['id'], setTransientPost: (post?: Post) => void) => {
+  try {
+    const response = await fetch(`http://localhost:3007/posts/${id}`)
+
+    if (response.status < 400) {
+      const post = (await response.json()) as Post
+      setTransientPost(post)
+    }
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export const fetchPosts = async (setPosts: (posts: Array<Post>) => void) => {
+  // should json validate here
+  try {
+    const posts = (await (await fetch('http://localhost:3007/posts')).json()) as Array<Post>
+
+    setPosts(posts)
+  } catch (e) {}
+}
+
+export const updatePost = async (post: Post) => {
+  try {
+    const response = await fetch(`http://localhost:3007/posts/${post.id}`, {
+      method: 'PATCH',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(post),
+    })
+
+    console.log(response)
+  } catch (e) {}
+}
+
+export const postPost = async (post: Post) => {
+  try {
+    const response = await fetch('http://localhost:3007/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(post),
+    })
+
+    console.log(response)
+  } catch (e) {}
+}
+
+export const deletePost = async (postId: Post['id']) => {
+  try {
+    const response = await fetch(`http://localhost:3007/posts/${postId}`, {
+      method: 'DELETE',
+    })
+
+    console.log(response)
+  } catch (e) {}
+}

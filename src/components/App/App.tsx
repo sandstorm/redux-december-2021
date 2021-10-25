@@ -12,17 +12,17 @@ function App() {
         <SideBar />
         <Switch>
           <Route path="/posts">
-            <div className="content">
+            <div id="content" className="content">
               <PostListing />
             </div>
           </Route>
           <Route path="/create">
-            <div className="content">
+            <div id="content" className="content">
               <CreatePostView />
             </div>
           </Route>
           <Route path="/edit/:id">
-            <div className="content">
+            <div id="content" className="content">
               <PostEditorView />
             </div>
           </Route>

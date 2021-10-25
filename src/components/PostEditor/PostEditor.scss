@@ -1,6 +1,14 @@
 .post-editor {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 
+  h1 {
+    text-align: center;
+  }
 
+  label + input,
+  label + textarea {
+    margin-top: 4px;
+  }
 }
