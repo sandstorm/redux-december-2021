@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "First post",
+    "content": "Hey, what kind of coffee do you want? Hazelnut! Hazelnut! What if your name was Zelnut? And then I would be all like Hey, Zelnut. Thats terrible. Hey, Zelnut. Stop!",
+    "creationDate": "2021-10-20T13:30:00"
+  },
+  {
+    "id": 2,
+    "title": "Something else entirely",
+    "content": "Eyahh! These jelly kinders arent... alive, are they? What? No, they cant even talk. Kick it! Thanks for helping me out guys. What are these buggers for, anyway? Oh, theyre decorations for my Biennial Gumball Ball. Tonight!  Sounds like it gonna be large. Yes! So very large. Id like you to be there as my special guest. You want me to go with you to the ball? Heck yes. As my pal! Oh. Right. It starts at seven, so dont be late! Fionna, we got trouble! My tail is totally frizzin out! Ill check it out.",
+    "creationDate": "2021-10-20T13:40:00"
+  },
+  {
+    "id": 3,
+    "title": "Mathmatical!",
+    "content": "Every hundred years, it spews evil spores across the land. Then lets burn its butt down to the roof rubbins. (The duo walks forward.) Finn, I can feel a bunch a eyeballs peepin us from the woods. Hhyuuugs!",
+    "creationDate": "2021-10-21T14:40:00"
+  },
+  {
+    "id": 4,
+    "title": "Test",
+    "content": "something",
+    "creationDate": "2021-10-20T14:00:00"
+  },
+  {
+    "id": "2b9d1d5f-4bf3-47fc-a36f-0a7195c596b1",
+    "creationDate": "2021-11-01T14:04:01.106Z",
+    "title": "test",
+    "content": "a new post written by me"
+  }
+]
