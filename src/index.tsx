@@ -3,6 +3,14 @@ import ReactDOM from 'react-dom'
 import './index.scss'
 import App from './components/App/App'
 import reportWebVitals from './reportWebVitals'
+import { configureStore } from './store/configureStore'
+
+export const store = configureStore()
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
 
 ReactDOM.render(
   <React.StrictMode>
