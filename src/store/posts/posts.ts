@@ -11,8 +11,27 @@ const initialState: PostState = {
   ids: [],
 }
 
-export const postReducer = (state: PostState = initialState, action: AnyAction) => {
+const ADD_POST = 'posts/addPost'
+const addPost = (post: Post) => ({
+  payload: { post },
+  type: ADD_POST,
+})
+
+type PostAction = ReturnType<typeof addPost>
+
+export const postReducer = (state: PostState = initialState, action: PostAction): PostState => {
   switch (action.type) {
+    case ADD_POST: {
+      const { post } = action.payload
+      return {
+        byId: {
+          ...state.byId,
+          [post.id]: post,
+        },
+        ids: [...state.ids, post.id],
+      }
+    }
+
     default: {
       return state
     }
