@@ -12,7 +12,7 @@ const initialState: PostState = {
 }
 
 const ADD_POST = 'posts/addPost'
-const addPost = (post: Post) => ({
+export const addPost = (post: Post) => ({
   payload: { post },
   type: ADD_POST,
 })

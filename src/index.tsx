@@ -4,6 +4,7 @@ import './index.scss'
 import App from './components/App/App'
 import reportWebVitals from './reportWebVitals'
 import { configureStore } from './store/configureStore'
+import {Provider} from 'react-redux'
 
 export const store = configureStore()
 
@@ -14,7 +15,9 @@ export type AppDispatch = typeof store.dispatch
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )
