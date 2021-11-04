@@ -55,13 +55,3 @@ export const postPost = async (post: Post) => {
     console.log(response)
   } catch (e) {}
 }
-
-export const deletePost = async (postId: Post['id']) => {
-  try {
-    const response = await fetch(`http://localhost:3007/posts/${postId}`, {
-      method: 'DELETE',
-    })
-
-    console.log(response)
-  } catch (e) {}
-}

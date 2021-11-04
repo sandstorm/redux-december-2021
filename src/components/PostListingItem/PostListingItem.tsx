@@ -2,10 +2,10 @@ import { FC, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons'
-import { deletePost, Post } from '../../model/Post'
+import { Post } from '../../model/Post'
 import './PostListingItem.scss'
 import { RootState } from '../../store/configureStore'
-import { selectors } from '../../store/posts/posts'
+import { selectors, deletePost } from '../../store/posts/posts'
 import { connect, ConnectedProps } from 'react-redux'
 
 type OwnProps = {
@@ -19,24 +19,25 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  deletePost,
+}
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux & OwnProps
 
 const PostListingItem: FC<Props> = (props) => {
+  const { deletePost, postId } = props
   const history = useHistory()
 
   const handleEditClick = useCallback(() => {
-    history.push(`/edit/${props.postId}`)
-  }, [props.postId, history])
+    history.push(`/edit/${postId}`)
+  }, [postId, history])
 
   const handleDeleteClick = useCallback(() => {
-    deletePost(props.postId).then(() => {
-      history.push('/posts')
-    })
-  }, [props.postId, history])
+    deletePost(postId)
+  }, [postId, deletePost])
 
   return (
     <div className="post-listing-item">

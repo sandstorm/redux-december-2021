@@ -16,6 +16,17 @@ export const fetchPosts = createAsyncThunk('posts/fetch', async () => {
   return posts
 })
 
+export const deletePost = createAsyncThunk('posts/delete', async (id: Post['id']) => {
+  await fetch(`http://localhost:3007/posts/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return { id }
+})
+
 export const postSlice = createSlice({
   name: 'posts',
   initialState,
@@ -50,6 +61,15 @@ export const postSlice = createSlice({
         }
       })
       .addCase(fetchPosts.rejected, (state, _action) => state)
+      .addCase(deletePost.fulfilled, (state, action) => {
+        const { id } = action.payload
+        const { [id]: _, ...byId } = state.byId
+
+        return {
+          ids: state.ids.filter((postId) => postId !== id),
+          byId,
+        }
+      })
   },
 })
 
