@@ -27,6 +27,21 @@ export const deletePost = createAsyncThunk('posts/delete', async (id: Post['id']
   return { id }
 })
 
+export const updatePost = createAsyncThunk('posts/update', async (post: Post) => {
+  const updatedPost = await (
+    await fetch(`http://localhost:3007/posts/${post.id}`, {
+      method: 'PATCH',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(post),
+    })
+  ).json()
+
+  return { updatedPost }
+})
+
 export const postSlice = createSlice({
   name: 'posts',
   initialState,
@@ -68,6 +83,17 @@ export const postSlice = createSlice({
         return {
           ids: state.ids.filter((postId) => postId !== id),
           byId,
+        }
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        const { updatedPost } = action.payload
+
+        return {
+          ...state,
+          byId: {
+            ...state.byId,
+            [updatedPost.id]: updatedPost,
+          },
         }
       })
   },

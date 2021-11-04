@@ -10,26 +10,20 @@ function App() {
     <Router>
       <div className="App">
         <SideBar />
-        <Switch>
-          <Route path="/posts">
-            <div id="content" className="content">
+        <div id="content" className="content">
+          <Switch>
+            <Route path="/posts">
               <PostListing />
-            </div>
-          </Route>
-          <Route path="/create">
-            <div id="content" className="content">
+            </Route>
+            <Route path="/create">
               <CreatePostView />
-            </div>
-          </Route>
-          <Route path="/edit/:id">
-            <div id="content" className="content">
-              <PostEditorView />
-            </div>
-          </Route>
-          <Route path="*">
-            <Redirect to="/posts" />
-          </Route>
-        </Switch>
+            </Route>
+            <Route path="/edit/:id" component={PostEditorView}></Route>
+            <Route path="*">
+              <Redirect to="/posts" />
+            </Route>
+          </Switch>
+        </div>
       </div>
     </Router>
   )

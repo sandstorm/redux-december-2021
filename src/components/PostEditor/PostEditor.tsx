@@ -5,7 +5,7 @@ import './PostEditor.scss'
 
 type PostEditorProps = {
   post: Post
-  onSave: (post: Post) => Promise<void>
+  onSave: (post: Post) => void
 }
 
 const PostEditor: FC<PostEditorProps> = (props) => {
@@ -35,13 +35,13 @@ const PostEditor: FC<PostEditorProps> = (props) => {
     e.preventDefault()
     e.stopPropagation()
 
-    props
-      .onSave({
-        ...props.post,
-        title,
-        content,
-      })
-      .then(() => history.push('/posts'))
+    props.onSave({
+      ...props.post,
+      title,
+      content,
+    })
+
+    history.push('/posts')
   }
 
   return (
