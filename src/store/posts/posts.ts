@@ -55,6 +55,8 @@ export const postSlice = createSlice({
 
 // Primitive
 const getPosts = (state: { posts: PostState }) => state.posts.ids.map((id) => state.posts.byId[id])
+const getPostIds = (state: { posts: PostState }) => state.posts.ids
+const getPostById = (state: { posts: PostState }, props: { postId: Post['id'] }) => state.posts.byId[props.postId]
 
 // Memoized
 const getFirstPost = createSelector([getPosts], (posts) => posts[0])
@@ -62,4 +64,6 @@ const getFirstPost = createSelector([getPosts], (posts) => posts[0])
 export const selectors = {
   getPosts,
   getFirstPost,
+  getPostById,
+  getPostIds,
 }

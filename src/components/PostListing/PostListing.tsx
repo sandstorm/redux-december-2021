@@ -9,7 +9,7 @@ import { selectors as postsLoadingSelectors } from '../../store/posts/loading'
 
 const mapStateToProps = (state: RootState) => {
   return {
-    posts: selectors.getPosts(state),
+    postIds: selectors.getPostIds(state),
     firstPost: selectors.getFirstPost(state),
     postsLoading: postsLoadingSelectors.getPostsLoading(state),
   }
@@ -46,9 +46,9 @@ const PostListing = (props: Props) => {
       <main>
         <button onClick={() => props.addPost(createBlankPost())}>Add post</button>
         <ul>
-          {props.posts.map((post, index) => (
-            <li key={post.id}>
-              <PostListingItem post={post} index={index} />
+          {props.postIds.map((id, index) => (
+            <li key={id}>
+              <PostListingItem postId={id} index={index} />
             </li>
           ))}
         </ul>
