@@ -1,4 +1,4 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Post } from '../../model/Post'
 
 type PostState = {
@@ -10,6 +10,11 @@ const initialState: PostState = {
   byId: {},
   ids: [],
 }
+
+export const fetchPosts = createAsyncThunk('posts/fetch', async () => {
+  const posts = (await (await fetch('http://localhost:3007/posts')).json()) as Array<Post>
+  return posts
+})
 
 export const postSlice = createSlice({
   name: 'posts',
@@ -25,6 +30,26 @@ export const postSlice = createSlice({
         ids: [...state.ids, post.id],
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPosts.pending, (state, _action) => state)
+      .addCase(fetchPosts.fulfilled, (_state, action) => {
+        const posts = action.payload
+        const ids = posts.map((p) => p.id) as Array<Post['id']>
+
+        return {
+          ids,
+          byId: posts.reduce(
+            (acc, post) => ({
+              ...acc,
+              [post.id]: post,
+            }),
+            {}
+          ),
+        }
+      })
+      .addCase(fetchPosts.rejected, (state, _action) => state)
   },
 })
 

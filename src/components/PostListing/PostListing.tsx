@@ -1,21 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import PostListingItem from '../PostListingItem/PostListingItem'
-import { createBlankPost, fetchPosts, Post } from '../../model/Post'
-import { useLocation } from 'react-router-dom'
+import { createBlankPost } from '../../model/Post'
 import './PostListing.scss'
 import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '../../store/configureStore'
-import { postSlice, selectors } from '../../store/posts/posts'
+import { fetchPosts, postSlice, selectors } from '../../store/posts/posts'
+import { selectors as postsLoadingSelectors } from '../../store/posts/loading'
 
 const mapStateToProps = (state: RootState) => {
   return {
     posts: selectors.getPosts(state),
     firstPost: selectors.getFirstPost(state),
+    postsLoading: postsLoadingSelectors.getPostsLoading(state),
   }
 }
 
 const mapDispatchToProps = {
   addPost: postSlice.actions.addPost,
+  fetchPosts,
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
@@ -24,18 +26,13 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux & {}
 
 const PostListing = (props: Props) => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [posts, setPosts] = useState<Array<Post> | undefined>(undefined)
-  const location = useLocation()
-
   useEffect(() => {
-    setIsLoading(true)
-    fetchPosts(setPosts).finally(() => {
-      setIsLoading(false)
-    })
-  }, [location.key])
+    props.fetchPosts()
 
-  if (isLoading) {
+    // eslint-disable-next-line
+  }, [])
+
+  if (props.postsLoading) {
     return <p>Loading Post...</p>
   }
 

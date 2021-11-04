@@ -27,15 +27,6 @@ export const fetchPost = async (id: Post['id'], setTransientPost: (post?: Post) 
   }
 }
 
-export const fetchPosts = async (setPosts: (posts: Array<Post>) => void) => {
-  // should json validate here
-  try {
-    const posts = (await (await fetch('http://localhost:3007/posts')).json()) as Array<Post>
-
-    setPosts(posts)
-  } catch (e) {}
-}
-
 export const updatePost = async (post: Post) => {
   try {
     const response = await fetch(`http://localhost:3007/posts/${post.id}`, {
