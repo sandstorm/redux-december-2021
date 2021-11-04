@@ -6,11 +6,12 @@ import './PostListing.scss'
 import { RootState } from '../..'
 import { addPost } from '../../store/posts/posts'
 import { connect, ConnectedProps } from 'react-redux'
+import { selectors } from '../../store/posts/posts'
 
 const mapStateToProps = (state: RootState) => {
-  const { posts } = state
   return {
-    posts: posts.ids.map((id) => posts.byId[id]),
+    posts: selectors.getPosts(state),
+    firstPost: selectors.getFirstPost(state),
   }
 }
 
@@ -38,6 +39,8 @@ const PostListing = (props: Props) => {
   if (isLoading) {
     return <p>Loading Post...</p>
   }
+
+  console.log({ firstPost: props.firstPost })
 
   return (
     <div className="post-listing">

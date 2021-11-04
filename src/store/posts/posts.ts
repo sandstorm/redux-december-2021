@@ -1,4 +1,4 @@
-import { AnyAction } from '@reduxjs/toolkit'
+import { AnyAction, createSelector } from '@reduxjs/toolkit'
 import { Post } from '../../model/Post'
 
 type PostState = {
@@ -36,4 +36,15 @@ export const postReducer = (state: PostState = initialState, action: PostAction)
       return state
     }
   }
+}
+
+// Primitive
+const getPosts = (state: { posts: PostState }) => state.posts.ids.map((id) => state.posts.byId[id])
+
+// Memoized
+const getFirstPost = createSelector([getPosts], (posts) => posts[0])
+
+export const selectors = {
+  getPosts,
+  getFirstPost,
 }
