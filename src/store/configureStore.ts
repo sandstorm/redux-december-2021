@@ -1,17 +1,15 @@
-import { applyMiddleware, createStore } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { postReducer } from './posts/posts'
-import { combineReducers } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { postSlice } from './posts/posts'
 
-export function configureStore() {
-  const middlewares = [thunkMiddleware]
-  const middlewareEnhancer = applyMiddleware(...middlewares)
+const rootReducer = combineReducers({
+  posts: postSlice.reducer,
+})
 
-  const enhancers = [middlewareEnhancer]
-  const composedEnhancers = composeWithDevTools(...enhancers)
+export const store = configureStore({
+  reducer: rootReducer,
+})
 
-  const store = createStore(combineReducers({ posts: postReducer }), undefined, composedEnhancers)
-
-  return store
-}
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch

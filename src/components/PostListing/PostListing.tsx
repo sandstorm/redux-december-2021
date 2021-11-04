@@ -3,10 +3,9 @@ import PostListingItem from '../PostListingItem/PostListingItem'
 import { createBlankPost, fetchPosts, Post } from '../../model/Post'
 import { useLocation } from 'react-router-dom'
 import './PostListing.scss'
-import { RootState } from '../..'
-import { addPost } from '../../store/posts/posts'
 import { connect, ConnectedProps } from 'react-redux'
-import { selectors } from '../../store/posts/posts'
+import { RootState } from '../../store/configureStore'
+import { postSlice, selectors } from '../../store/posts/posts'
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -16,7 +15,7 @@ const mapStateToProps = (state: RootState) => {
 }
 
 const mapDispatchToProps = {
-  addPost,
+  addPost: postSlice.actions.addPost,
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps)

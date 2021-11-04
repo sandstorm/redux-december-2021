@@ -1,4 +1,4 @@
-import { AnyAction, createSelector } from '@reduxjs/toolkit'
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Post } from '../../model/Post'
 
 type PostState = {
@@ -11,18 +11,12 @@ const initialState: PostState = {
   ids: [],
 }
 
-const ADD_POST = 'posts/addPost'
-export const addPost = (post: Post) => ({
-  payload: { post },
-  type: ADD_POST,
-})
-
-type PostAction = ReturnType<typeof addPost>
-
-export const postReducer = (state: PostState = initialState, action: PostAction): PostState => {
-  switch (action.type) {
-    case ADD_POST: {
-      const { post } = action.payload
+export const postSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    addPost: (state, action: PayloadAction<Post>) => {
+      const post = action.payload
       return {
         byId: {
           ...state.byId,
@@ -30,13 +24,9 @@ export const postReducer = (state: PostState = initialState, action: PostAction)
         },
         ids: [...state.ids, post.id],
       }
-    }
-
-    default: {
-      return state
-    }
-  }
-}
+    },
+  },
+})
 
 // Primitive
 const getPosts = (state: { posts: PostState }) => state.posts.ids.map((id) => state.posts.byId[id])
