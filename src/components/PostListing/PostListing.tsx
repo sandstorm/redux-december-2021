@@ -17,7 +17,7 @@ const PostListing = () => {
   }, [location.key])
 
   if (isLoading) {
-    return <p>Loading Post...</p>
+    return <p>Loading Posts...</p>
   }
 
   if (posts !== undefined) {
@@ -28,9 +28,9 @@ const PostListing = () => {
         </header>
         <main>
           <ul>
-            {posts.map((post, index) => (
+            {posts.map(post => (
               <li key={post.id}>
-                <PostListingItem post={post} index={index} />
+                <PostListingItem post={post} />
               </li>
             ))}
           </ul>
@@ -39,7 +39,7 @@ const PostListing = () => {
     )
   }
 
-  return <p>Unable to load post!</p>
+  return <p>Unable to load posts!</p>
 }
 
 export default PostListing

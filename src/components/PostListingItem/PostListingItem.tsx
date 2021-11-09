@@ -7,7 +7,6 @@ import './PostListingItem.scss'
 
 type PostListingItemProps = {
   post: Post
-  index: number
 }
 
 const PostListingItem: FC<PostListingItemProps> = (props) => {
