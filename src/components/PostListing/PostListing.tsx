@@ -11,9 +11,18 @@ const PostListing = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    fetchPosts(setPosts).finally(() => {
-      setIsLoading(false)
+    // create abort controller to cancel in-flight
+    const abortController = new AbortController()
+    
+    fetchPosts(setPosts, abortController.signal).finally(() => {
+      if (!abortController.signal.aborted) {
+        setIsLoading(false)
+      }
     })
+
+    return () => {
+      abortController.abort()
+    }
   }, [location.key])
 
   if (isLoading) {

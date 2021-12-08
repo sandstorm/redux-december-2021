@@ -27,12 +27,14 @@ export const fetchPost = async (id: Post['id'], setTransientPost: (post?: Post) 
   }
 }
 
-export const fetchPosts = async (setPosts: (posts: Array<Post>) => void) => {
+export const fetchPosts = async (setPosts: (posts: Array<Post>) => void, abortSignal: AbortSignal) => {
   // should json validate here
   try {
-    const posts = (await (await fetch('http://localhost:3007/posts')).json()) as Array<Post>
+    const posts = (await (await fetch('http://localhost:3007/posts', {signal: abortSignal})).json()) as Array<Post>
 
-    setPosts(posts)
+    if (!abortSignal.aborted) {
+      setPosts(posts)
+    }
   } catch (e) {}
 }
 
